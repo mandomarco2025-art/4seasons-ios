@@ -18,9 +18,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Capacitor Dependencies
+      - name: Install Capacitor iOS Dependencies
         run: |
-          npm install @capacitor/core @capacitor/ios --no-package-lock --legacy-peer-deps
+          cp package-ios.json package.json
+          npm install
 
       - name: Install CocoaPods
         run: |
