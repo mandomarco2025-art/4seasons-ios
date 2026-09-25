@@ -40,22 +40,16 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO
 
-      - name: Package App to ZIP
+      - name: Package to IPA for Diawi
         run: |
-          mkdir -p build/Payload
+          mkdir -p build_output/Payload
           APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "App.app" -type d | head -n 1)
-          if [ -d "$APP_PATH" ]; then
-            cp -r "$APP_PATH" build/Payload/
-            cd build
-            zip -r 4Seasons-iOS-App.zip Payload/
-          else
-            echo "App build output not found, listing directory:"
-            find ~/Library/Developer/Xcode/DerivedData -maxdepth 5
-            exit 1
-          fi
+          cp -r "$APP_PATH" build_output/Payload/
+          cd build_output
+          zip -r 4Seasons-App.ipa Payload/
 
-      - name: Upload iOS App Artifact
+      - name: Upload IPA Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: 4Seasons-iOS-App
-          path: build/4Seasons-iOS-App.zip
+          name: 4Seasons-IPA
+          path: build_output/4Seasons-App.ipa
