@@ -1,0 +1,6 @@
+node_modules
+.next
+android
+public/*.apk
+public/*.aab
+public/*.tar.gz
